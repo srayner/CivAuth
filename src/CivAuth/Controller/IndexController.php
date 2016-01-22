@@ -6,6 +6,7 @@ use CivAuth\Form\AuthForm;
 use CivAuth\Form\Filter;
 
 use Zend\Mvc\controller\AbstractActionController;
+use Zend\Authentication\Adapter;
 
 class IndexController extends AbstractActionController
 {
@@ -27,6 +28,7 @@ class IndexController extends AbstractActionController
                 $data = $form->getData();
                 $config = $this->getServiceLocator()->get('config');
                 $staticSalt = $config['static_salt'];
+                $authAdapter = new AuthAdapter();
             }
             
         }
