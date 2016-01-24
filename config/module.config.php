@@ -60,6 +60,12 @@ return array(
         ),
     ),
     
+    'service_manager' => array(
+        'factories' => array(
+            'civauth_form' => 'CivAuth\Form\AuthFormFactory',
+        )
+    ),
+    
     'static_salt' => 'fH7K4kDWTk7NFl5G3r3e',
 );
 

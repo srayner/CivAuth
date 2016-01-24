@@ -2,13 +2,8 @@
 
 namespace Civauth\Controller;
 
-use CivAuth\Form\AuthForm;
-use CivAuth\Form\Filter;
-
 use Zend\Mvc\controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
-use Zend\Authentication\AuthenticationService;
 
 class IndexController extends AbstractActionController
 {
@@ -20,7 +15,7 @@ class IndexController extends AbstractActionController
     public function loginAction()
     {
         // Create a new form instance.
-        $form = new AuthForm();
+        $form = $this->getServiceLocator()->get('civauth_form');
         $form->get('submit')->setValue('Login');
         
         // Check if request is a POST.
@@ -47,7 +42,7 @@ class IndexController extends AbstractActionController
     public function registerAction()
     {
         // Create a new form instance.
-        $form = new AuthForm();
+        $form = $this->getServiceLocator()->get('civauth_form');
         $form->get('submit')->setValue('Register');
         
         // Check if request is a POST.
