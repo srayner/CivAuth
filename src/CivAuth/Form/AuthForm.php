@@ -9,7 +9,10 @@ class AuthForm extends Form
     public function __construct($name = null)
     {
         parent::__construct('auth');
-        $this->setAttribute('method', 'post');
+        $this->setAttributes(array(
+            'method' => 'post',
+            'class' => 'form'
+        ));
         $this->addElements();
     }
     
@@ -20,6 +23,8 @@ class AuthForm extends Form
            'name' => 'username',
             'attributes' => array(
                 'type' => 'text',
+                'class' => 'form-control',
+                'id' => 'password-input',
             ),
             'options' => array(
                 'label' => 'Username',
@@ -31,6 +36,8 @@ class AuthForm extends Form
            'name' => 'password',
             'attributes' => array(
                 'type' => 'password',
+                'class' => 'form-control',
+                'id' => 'password-input',
             ),
             'options' => array(
                 'label' => 'Password',
@@ -43,6 +50,7 @@ class AuthForm extends Form
             'attributes' => array(
                 'type' => 'submit',
                 'value' => 'Go',
+                'class' => 'btn btn-primary',
                 'id' => 'submitbutton',
             ),
         ));
