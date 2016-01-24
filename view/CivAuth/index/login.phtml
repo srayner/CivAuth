@@ -1,9 +1,13 @@
 <h1>Login</h1>
 
+<?php if ($message != null):?>
+<p><?php echo $message;?></p>
+<?php endif; ?>
+
 <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-8">    
 
-        <?php $form->setAttribute('action', $this->url('register'));?>
+        <?php $form->setAttribute('action', $this->url('login'));?>
         <?php echo $this->form()->openTag($form); ?>
         <div class="form-group">
              <?php echo $this->formRow($form->get('username')); ?>

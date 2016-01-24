@@ -17,6 +17,7 @@ class IndexController extends AbstractActionController
         // Create a new form instance.
         $form = $this->getServiceLocator()->get('CivAuth\Form');
         $form->get('submit')->setValue('Login');
+        $message = null;
         
         // Check if request is a POST.
         $request = $this->getRequest();
@@ -27,15 +28,21 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 
                 // Attempt login.
-                
-                // Redirect to user profile (only if successfull).
-                $this->redirect()->toRoute('profile');
+                $data = $form->getData();
+                $service = $this->getServiceLocator()->get('CivAuth\Service');
+                if ($service->login($data)) {
+                    // Redirect to user profile (only if successfull).
+                    $this->redirect()->toRoute('profile');
+                } else {
+                    $message = 'Authentication failed.';
+                }
             }
         }
         
         // Render or re-render the form.
         return new ViewModel(array(
-            'form' => $form
+            'form' => $form,
+            'message' => $message
         ));
     }
     
