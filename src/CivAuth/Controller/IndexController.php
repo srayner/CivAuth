@@ -19,24 +19,29 @@ class IndexController extends AbstractActionController
     
     public function loginAction()
     {
-        $form = new AuthForm;
+        // Create a new form instance.
+        $form = new AuthForm();
         $form->get('submit')->setValue('Login');
         
+        // Check if request is a POST.
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter(new Filter());
+            
+            // Check details are valid.
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $data = $form->getData();
-                $config = $this->getServiceLocator()->get('config');
-                $staticSalt = $config['static_salt'];
                 
-                $authService = new AuthenticationService;
+                // Attempt login.
                 
-                $authAdapter = new AuthAdapter();
+                // Redirect to user profile (only if successfull).
+                $this->redirect()->toRoute('profile');
             }
-            
         }
+        
+        // Render or re-render the form.
+        return new ViewModel(array(
+            'form' => $form
+        ));
     }
     
     public function registerAction()
