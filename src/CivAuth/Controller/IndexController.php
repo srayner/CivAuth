@@ -15,7 +15,7 @@ class IndexController extends AbstractActionController
     public function loginAction()
     {
         // Create a new form instance.
-        $form = $this->getServiceLocator()->get('civauth_form');
+        $form = $this->getServiceLocator()->get('CivAuth\Form');
         $form->get('submit')->setValue('Login');
         
         // Check if request is a POST.
@@ -42,7 +42,7 @@ class IndexController extends AbstractActionController
     public function registerAction()
     {
         // Create a new form instance.
-        $form = $this->getServiceLocator()->get('civauth_form');
+        $form = $this->getServiceLocator()->get('CivAuth\Form');
         $form->get('submit')->setValue('Register');
         
         // Check if request is a POST.
@@ -55,8 +55,7 @@ class IndexController extends AbstractActionController
                 
                 // Register user.
                 $data = $form->getData();
-                $hash = md5($data['password']);
-                file_put_contents('./data/passwd', $hash);
+                $this->getServiceLocator()->get('CivAuth\Service')->register($data);
                 
                 // Redirect to user profile.
                 $this->redirect()->toRoute('profile');

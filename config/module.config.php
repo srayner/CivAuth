@@ -61,8 +61,11 @@ return array(
     ),
     
     'service_manager' => array(
+        'invokables' => array(
+            'CivAuth\Service' => 'CivAuth\Service\AuthService',
+        ),
         'factories' => array(
-            'civauth_form' => 'CivAuth\Form\AuthFormFactory',
+            'CivAuth\Form' => 'CivAuth\Form\AuthFormFactory',
         )
     ),
     
